@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app='todoApp' lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>To Do List</title>
+  <script src="assets/libs/jquery-2.1.4.js"></script>
+  <script src="assets/libs/angular.js"></script>
+  <script src='app.js'></script>
+  <script src='services/todoService.js'></script>
+  <script src='controllers/todoController.js'></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body ng-controller="todoCtrl">
+  <div class="background">
+    <form>
+      <input ng-model="todoData.text" maxlength="26" class="text-input" type="text" placeholder="Add To Do" required>
+      <button ng-click="createTodo()" type="submit" class="add-btn"><span>+</span></button>
+    </form>
+    <div class="todo-container">
+      <h1>To Do List</h1>
+      <hr />
+      <div ng-repeat="todo in todos" class="todo">
+        <button ng-click="deleteTodo(todo._id)" type="submit" class="delete-btn"><span>-</span></button>
+        <input ng-checked="todo.check" ng-click="checkTodo(todo._id)" maxlength="26" type="checkbox" class="checkbox">
+        <p ng-click="editing = true" ng-hide="editing">{{todo.text}}</p>
+        <input ng-show="editing" ng-blur="editing = false; updateTodo(todo._id)" ng-model="todoData.textUpdate" class="text-update" type="text" autofocus>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
